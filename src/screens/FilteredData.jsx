@@ -16,6 +16,7 @@ import Axios from '../utils/Axios';
 
 const FilteredData = ({route}) => {
   const {query, title} = route.params;
+
   const {user} = useUser();
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -57,9 +58,7 @@ const FilteredData = ({route}) => {
           textAlign: 'center',
           marginTop: -20,
           marginBottom: 35,
-          color: isDarkMode
-          ? darkTheme.primaryColor
-          : lightTheme.primaryColor,
+          color: isDarkMode ? darkTheme.primaryColor : lightTheme.primaryColor,
           fontWeight: 'bold',
         }}>
         {filteredData.length} Data Found
@@ -115,7 +114,9 @@ const FilteredData = ({route}) => {
               </Text>
               <Text
                 style={[styles(isDarkMode).dataCell, styles(isDarkMode).cell]}>
-                {entry?.jobType?.govtService ? 'Govt Service' : 'Private'}
+                {entry?.jobType === 'Govt. Service'
+                  ? 'Govt Service'
+                  : 'Private'}
               </Text>
             </TouchableOpacity>
           ))
@@ -148,7 +149,7 @@ const styles = isDarkMode =>
       flexDirection: 'row',
       borderBottomWidth: 0.25,
       backgroundColor: isDarkMode ? '#0a0a0a' : '#F8FAFA',
-    
+
       borderColor: '#ccc',
     },
     headerCell: {
